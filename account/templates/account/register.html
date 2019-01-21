@@ -1,0 +1,147 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+	integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+</head>
+<body>
+	<div class="container-All">
+		<!-- section 1 -->
+
+		<div class="section-1 animated fadeInRight">
+
+		    {% if form.errors %}
+				<div class="alert alert-danger">
+
+                      {{ form.email.errors }}
+                      {{form.password2.errors }}
+                      </div>
+            {% endif %}
+
+
+        <div class="section-1 animated fadeInLeft">
+			<div class="main-form">
+				<div class="header pt-1">
+					<div class="form-header">
+
+						<p class="hello" style="font-family: 'Tangerine';">LogIn</p>
+					</div>
+					<div class="edit-icon">
+						<i class="fas fa-pencil-alt float-right pt-2 penSize"></i>
+					</div>
+				</div>
+
+
+				<form class="form" action ="{% url 'account:login' %}" method ="POST" >
+				  {% csrf_token %}
+				    <div class="input-group">
+				      <input type="text" class="form-control" placeholder="Username" name="username">
+				    </div>
+				    <div class="input-group">
+				      <input type="Password" class="form-control input-sm" placeholder="Password" name="password">
+				    </div>
+				    <div class="input-group">
+				       <button type="submit" class="btn btn-primary btn-block mb-3">Submit
+				</button>
+
+				    </div>
+				</form>
+
+			</div>
+		</div>
+
+			<!--
+			<button class="btn btn-block " onclick="location.href='{% url 'social:begin' 'facebook' %}';"><i class="fab fa-facebook fbicon"></i>
+				<span class="icontext h5">SignUp With Facebok</span>
+			</button> -->
+
+			<!-- <button class="btn btn-block " onclick="location.href='{% url 'social:begin' 'google-oauth2' %}'; ">
+								<img src="{% static 'assets/googlePng.png' %}" width="24" class="googleicon">
+				<span class="h5 googleicontext">SignUp with Google</span>
+			</button>
+			 -->
+
+
+
+		</div>
+		<div class="section-2">
+			<div class="toggle-line">
+				<pre class="h4"> --- OR --- </pre>
+			</div>
+		</div>
+		<form action ="{% url 'account:register' %}" method ="POST" >
+			{% csrf_token %}
+		<div class="section-3 animated fadeInLeft">
+			<div class="profile-image">
+				<img src="{% static 'assets/user2.png' %}" alt="profile-photo" width="90">
+			</div>
+			<div class="main-form">
+				<div class="header pt-1">
+					<div class="form-header">
+
+						<p class="hello" style="font-family: 'Tangerine';">Register</p>
+					</div>
+					<div class="edit-icon">
+						<i class="fas fa-pencil-alt float-right pt-2 penSize"></i>
+					</div>
+				</div>
+				<input type="email" class="form-control" name ='email' id="email" placeholder="Email address" required>
+				<input type="username" class="form-control" name ='username' id="username" placeholder="Username" required>
+				<input type="text" class="form-control" name ='first_name' id="user-first" placeholder="First Name" required>
+				<input type="text" class="form-control" name = 'last_name' id="user-last" placeholder="Last Name" >
+
+				<input type="text" class="form-control" name = 'date_of_birth' id="datepicker" placeholder="Date of Birth" required>
+				<!-- male female -->
+				<div class="form-group mt-2">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" value ='Male' name="gender">Male
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" value='Female' name="gender">Female
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" class="form-check-input" value ='Other' name="gender">Other
+						</label>
+					</div>
+				</div>
+				<!-- gender end -->
+
+
+
+
+				<input type="password" class="form-control" name ='password1' id="user-pwd" placeholder="Password" required>
+				<input type="password" class="form-control" name = 'password2' id="user-con-pwd" placeholder="Confirm Password" required>
+				<button type="submit" class="btn btn-primary btn-block mb-3">Submit
+				</button>
+			</div>
+		</div>
+	</form>
+	</div>
+	<script>
+		$( function() {
+			$( "#datepicker" ).datepicker();
+		} );
+	</script>
+</body>
+</html>

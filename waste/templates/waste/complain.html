@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>complain form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #DCDCDC;
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md" style="height: 40px; background-color: #eff1f3; margin-right: 0px;">
+        <div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+            <ul class="ml-auto">
+                <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-twitter"></i></a></li>
+                <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-facebook"></i></a></li>
+                <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-instagram"></i></a></li>
+                <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-youtube"></i></a></li>
+                <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-google-plus"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <nav style="margin-right: 0px; background-color: #ffffff; height: 75px;" class="navbar navbar-expand-md fixed-top-sm justify-content-start flex-nowrap">
+        <ul>
+            <li><a href="#"><h4 style="font-size: 29px; text-transform:none; color:#A9A9A9;" >DumPress</h4></a></li>
+        </ul>
+        <ul class="ml-auto">
+            <li style="font-size: 26px;"><a href="{% url 'account:login'%}">Back</a></li>
+        </ul>
+    </nav>
+
+
+<div style="height: 30px;"></div>
+<div class="container">
+    <h3>Complain Form</h3>
+    <div style="height: 20px;">   </div>
+
+  <form action="{% url 'waste:submit'%}" method= "Post">
+  	{% csrf_token %}
+    <label for="subject">Subject</label>
+    <input type="text" id="fname" name="subject" placeholder="Subject ">
+
+
+    <label for="dusbin">Dustbin</label>
+    <select id="dustbin" name="dustbin">
+      <option value="Russell">Russell</option>
+      <option value="Sadar">Sadar</option>
+      <option value="Reliance">Reliance</option>
+    </select>
+
+    <label for="complain">Complain</label>
+    <textarea id="complain" name="complain" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</div>
+ <div style="height: 50px;"></div>
+<footer class="footer">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-5" >
+                <h4 style="color:#bbb;" >DumPress</h4>
+                <h5 style="color:#bbb;" >&copy CopyRight</h5>
+            </div>
+        </div>
+</footer>
+
+<style type="text/css">
+
+footer {
+  height: 150px;
+  padding-top: 30px;
+  background-color: #292c2f;
+  color: #bbb;
+}
+
+</style>
+
+
+</body>
+</html>

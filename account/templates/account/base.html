@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+{% load staticfiles %}
+<title>waste-portal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+<link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+<link rel="stylesheet" href="#">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="" href="//fonts.googleapis.com/css?family=Tangerine" />
+
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-functions.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<script async="" src="{% static 'js/analytics.js' %}"></script>
+  <script src="{% static 'js/Chart.bundle.js' %}"></script>
+
+  <style type="text/css">/* Chart.js */
+    @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style>
+
+  <script src="{% static 'js/utils.js' %}"></script>
+
+  <style>
+  canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  </style>
+
+
+<style >
+    html {
+      scroll-behavior: smooth;
+    }
+
+		.footer{
+
+
+		font-size: 33px;
+   	font-family: 'Tangerine';
+   }
+   table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+</style>
+
+</head>
+
+<body style="background-color: #f6f6fc;">
+  <nav class="navbar navbar-expand-md" style="height: 40px; background-color: #eff1f3; margin-right: 0px;">
+      <div class="navbar-collapse collapse pt-2 pt-md-0" id="navbar2">
+        <ul class="ml-auto">
+          <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd; padding-top: 15px;" class="fa fa-twitter"></i></a></li>
+          <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-facebook"></i></a></li>
+          <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-instagram"></i></a></li>
+          <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-youtube"></i></a></li>
+          <li style="display: inline;"><a href="#" style=" margin: 5px;"><i style="font-size: 21px; color: #aab2bd;" class="fa fa-google-plus"></i></a></li>
+        </ul>
+      </div>
+  </nav>
+
+
+  <nav style="margin-right: 0px; background-color: #ffffff; height: 75px;" class="navbar navbar-expand-md fixed-top-sm justify-content-start flex-nowrap">
+
+        <ul>
+            <h4 style="font-size: 29px; text-transform:none; color:#A9A9A9;" >DumPress</h4></li>
+        </ul>
+
+      <ul class="ml-auto">
+        <button style="display: inline;" class ="btn btn-outline-success my-2 my-sm-0" onclick="document.getElementById('id01').style.display='block' " >Complains</button>
+
+        <form style="display: inline;" action="{% url 'account:logout' %}">
+        {% csrf_token %}
+        {{ user.username }}
+      <button class="btn btn-danger "" style="margin-left: 10px;"> Logout </button>
+</form>
+      </ul>
+  </nav>
+<div style="height: 30px;"></div>
+
+<div class="container">
+ <!-- <a class="navbar-brand" href="#" style ="font-size: 40px; font-family: 'Tangerine';margin-left: 35%;">Waste Management System</style></a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+</div>
+   {{ user.username }}
+ -->
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+      <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('id01').style.display='none'"
+        class="w3-button w3-display-topright">&times;</span>
+        <h2> Today's Complains</h2>
+      </header>
+      <div class="w3-container">
+      <table>
+        <tr>
+          <th>Place</th>
+          <th>Subject</th>
+        </tr>
+         {% for i in comp %}
+        <tr onclick="document.getElementById('id02')" >
+
+               <td> {{ i.dustbin }}</td>
+               <td> {{ i.subject }} </td>
+
+
+
+        </tr>
+        <tr id="id02">
+          <td>{{ i.complain }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<!--  <a class="navbar-brand" href="#" style ="
+    font-size: 33px;
+    font-family: 'sans-sanrif';
+    ">Waste Management System</style></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+</div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+</div>
+    <nav class="navbar navbar-light bg-light">
+  <form class="form-inline" action ="{% url 'account:login' %}" method ="POST" >
+  {% csrf_token %}
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">@</span>
+      </div>
+      <input type="text" class="form-control input-sm" placeholder="Username" name="username" required aria-label="Username"  aria-describedby="basic-addon1" >
+
+      <input type="Password" class="form-control input-sm" placeholder="Password" name="password" required aria-label="Password" style="margin-left: 10px; border-radius: 5px;">
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px; ">Login</button>
+
+    </div>
+
+
+</form>
+<form action="{% url 'account:register' %}">
+<button class="btn btn-secondary " href="{%url 'account:register' }" style="margin-left: 10px;"> Register </button>
+</form>
+</nav>
+
+<form action="{% url 'waste:complain' %}">
+       {% csrf_token %}
+        <button class="btn btn-info "" style=""> Complain </button>
+       </form>
+
+     </nav>
+     <img src = "{%static 'assets/pic2.png' %}" height ="900" width="1500" >
+
+</nav>
+ -->
+<!--
+<img src=" {%static 'account/img/map.png' %}" height="500px" width="1000px"></img>
+-->
+
+<input class="form-control campaign_form_control focus" placeholder="Location Targeting" required id="pac-input"
+  style="" aria-describedby="" type="text">
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<div style="height: 20px;"></div>
+
+<button id="showfull" class="btn btn-info">show full</button>
+<button id="showpath" class="btn btn-info">show path</button>
+<button id="showall" class="btn btn-info">show all</button>
+
+<div style="height: 150px"></div>
+
+<div data-gr-c-s-loaded="true">
+    <div style="width:75%;"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+    <canvas id="canvas" width="1013" height="506" class="chartjs-render-monitor" style="display: block; width: 1013px; height: 506px;"></canvas>
+    <!-- Sumit's code -->
+
+    </div>
+    <div style="height: 20px;"></div>
+    <button id="randomizeData" class="btn btn-info" style="display: none;">Randomize Data</button>
+    <div id="gotograph"></div>
+    </div>
+
+  <div style="height: 60px;"></div>
+
+
+  <span class="gr__tooltip">
+    <span class="gr__tooltip-content"></span>
+      <i class="gr__tooltip-logo"></i>
+    <span class="gr__triangle"></span>
+  </span>
+
+</div>
+
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <h4 style="padding-left: 40px; font-size:16px; font-family: 'Poppins',sans-serif;">DumPress</h4>
+                <h5 style="padding-left: 40px; font-size:16px; font-family: 'Poppins',sans-serif;">&copy CopyRight</h5>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style type="text/css">
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 150px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150px;
+}
+
+footer {
+  padding-top: 30px;
+  background-color: #292c2f;
+  color: #bbb;
+}
+
+</style>
+
+<script>
+    var lineChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Predicted Dustbin Volume',
+        borderColor: window.chartColors.red,
+        backgroundColor: window.chartColors.red,
+        fill: false,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ],
+        yAxisID: 'y-axis-1',
+      }, {
+        label: 'Actual Dustbin Volume',
+        borderColor: window.chartColors.blue,
+        backgroundColor: window.chartColors.blue,
+        fill: false,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ],
+        yAxisID: 'y-axis-1'
+      }]
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myLine = Chart.Line(ctx, {
+        data: lineChartData,
+        options: {
+          responsive: true,
+          hoverMode: 'index',
+          stacked: false,
+          title: {
+            display: true,
+            text: 'Dustbin Data'
+          },
+          scales: {
+            yAxes: [{
+              type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+              display: true,
+              position: 'left',
+              id: 'y-axis-1',
+            }, {
+              type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+              display: false,
+              position: 'right',
+              id: 'y-axis-2',
+
+              // grid line settings
+              gridLines: {
+                drawOnChartArea: false, // only want the grid lines for one axis to show up
+              },
+            }],
+          }
+        }
+      });
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+
+      lineChartData.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return randomScalingFactor();
+        });
+      });
+
+      window.myLine.update();
+    });
+</script>
+
+
+
+
+
+<script>
+
+
+
+
+//-------------------------------------------------------// Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDZvWlDAE6PtWBy_g2hefNOPv_DukvyteU",
+    authDomain: "waste-mng.firebaseapp.com",
+    databaseURL: "https://waste-mng.firebaseio.com",
+    projectId: "waste-mng",
+    storageBucket: "waste-mng.appspot.com",
+    messagingSenderId: "92962423621"
+  };
+  firebase.initializeApp(config);
+
+
+  var count=0;
+  // var sensorData = firebase.database().ref('dataValue');
+  function connectFirebase(){
+    var retrieveData = firebase.database().ref('Distance');
+    retrieveData.on('value', gotData) ;
+  }
+
+  function gotData(data){
+    dust_arr = data.val()
+    console.log(dust_arr);
+    updateMarker(dust_arr);
+
+  }
+
+  /*console.log(retrieveData);*/
+
+  var intervalID = setInterval(connectFirebase, 5000);
+//-------------------------------------------------------// End Firebase
+
+
+
+
+
+//-------------------------------------------------------// Initialize Map
+var map, fireMarker, pathisvisible = false;
+var markers = [];
+var fullmarkers = [];
+
+function myMap() {
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var directionsService = new google.maps.DirectionsService;
+
+      var mapProp= {
+          center:{lat: 23.1801, lng: 80.0269},
+          zoom:11,
+      };
+
+      map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+      /*directionsDisplay.setMap(map);
+      directionsService.route(
+        {
+          origin: {lat: 37.77, lng: -122.447},  // Haight.
+          destination: {lat: 37.7563, lng: -122.4732},
+          waypoints: [{
+            location: {lat: 37.768, lng: -122.511},
+            stopover: true
+          }],
+          travelMode: google.maps.TravelMode["DRIVING"]
+        }, function(response, status) {
+          if (status == 'OK') {
+            directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        }
+      );
+*/
+      var full = false;
+
+      var m1 = new google.maps.Marker({
+            position: {lat: 23.1801, lng: 80.0269},
+            map: map,
+            title: '89%'
+      });
+
+      markers.push(m1);
+      fullmarkers.push(m1);
+
+      m1.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+
+      });
+
+      var m2 = new google.maps.Marker({
+            position: {lat: 23.1511, lng: 79.9486},
+            map: map,
+            title: '65%'
+      });
+
+      markers.push(m2);
+      m2.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+
+      var m3 = new google.maps.Marker({
+            position: {lat: 23.1688, lng: 79.9335},
+            map: map,
+            title: '43%'
+      });
+
+      markers.push(m3);
+      m3.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+
+      var m4 = new google.maps.Marker({
+            position: {lat: 23.1656, lng: 79.9506},
+            map: map,
+            title: '93%'
+      });
+
+      markers.push(m4);
+      fullmarkers.push(m4);
+      m4.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+
+      var m5 = new google.maps.Marker({
+            position: {lat: 23.168058, lng:79.962486},
+            map: map,
+            title: '98%'
+      });
+      m5.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+      markers.push(m5);
+      fullmarkers.push(m5);
+
+
+
+      fireMarker = new google.maps.Marker({
+            position: {lat: 23.155466, lng:79.9427},
+            map: map,
+            title: '45%'
+      });
+      markers.push(fireMarker);
+      fireMarker.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+
+      var m6 = new google.maps.Marker({
+            position: {lat: 23.1161891, lng:79.9382917},
+            map: map,
+            title: '26%'
+      });
+
+      markers.push(m6);
+      m6.addListener('click', function() {
+        window.location.href = '#gotograph';
+        $('#randomizeData').click();
+      });
+
+
+      fireMarker.setTitle('100%');
+
+      // Create the search box and link it to the UI element.
+      var input = document.getElementById('pac-input');
+
+      var searchBox = new google.maps.places.SearchBox(input);
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+      // Bias the SearchBox results towards current map's viewport.
+      map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+      });
+
+
+      // Listen for the event fired when the user selects a prediction and retrieve
+      // more details for that place.
+      searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+          return;
+        }
+
+        // Clear out the old markers.
+        markers.forEach(function(m) {
+          m.setMap(map);
+        });
+
+        // For each place, get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+          if (!place.geometry) {
+            console.log("Returned place contains no geometry");
+            return;
+          }
+
+          var icon = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+          };
+
+
+
+          if (place.geometry.viewport) {
+            // Only geocodes have viewport.
+            bounds.union(place.geometry.viewport);
+          } else {
+            bounds.extend(place.geometry.location);
+          }
+        });
+
+        map.fitBounds(bounds);
+      });
+
+      document.getElementById('showpath').addEventListener('click', function() {
+        pathisvisible = true;
+        directionsDisplay.setMap(map);
+        if(full)
+          calculateAndDisplayRoute(directionsService, directionsDisplay, fullmarkers);
+        else
+          calculateAndDisplayRoute(directionsService, directionsDisplay, markers);
+      });
+
+      document.getElementById('showfull').addEventListener('click', function() {
+        pathisvisible = false;
+        directionsDisplay.setMap(null);
+        full = true;
+        setMarkerNull(markers);
+        fullDust(fullmarkers, map);
+      });
+
+      document.getElementById('showall').addEventListener('click', function() {
+        pathisvisible = false;
+        directionsDisplay.setMap(null);
+        full = false;
+        setMarkerNull(markers);
+        allDust(markers, map);
+      });
+
+
+  }
+
+  var flagg = false;
+  function updateMarker(distance){
+    console.log(distance);
+
+    if(distance<10){
+      if(!flagg){
+        console.log("first call");
+
+        fullmarkers.push(fireMarker);
+        flagg = true;
+        $('#showfull').click();
+        if(pathisvisible) $('#showpath').click();
+
+      }
+      console.log("distance is less than 10");
+
+    }
+    else{
+      if(flagg){
+        console.log("other else inside flag");
+
+        fullmarkers.pop();
+        flagg = false;
+        $('#showall').click();
+        if(pathisvisible) $('#showpath').click();
+      }
+      console.log("else is execute");
+    }
+  }
+
+
+//-------------------------------------------------------// End Map
+
+
+
+
+
+  function calculateAndDisplayRoute(directionsService, directionsDisplay, fullmarkers) {
+    setMarkerNull(fullmarkers);
+    console.log("hello");
+
+    var waypts = [];
+
+    for (var i = 1; i < fullmarkers.length-1; i++) {
+        waypts.push({
+          location: {lat:fullmarkers[i].getPosition().lat(), lng:fullmarkers[i].getPosition().lng()},
+          stopover: true
+        });
+    }
+
+    directionsService.route({
+      origin: { lat:fullmarkers[0].getPosition().lat() ,
+                lng:fullmarkers[0].getPosition().lng() } ,
+
+      destination: { lat:fullmarkers[fullmarkers.length-1].getPosition().lat(),
+                     lng:fullmarkers[fullmarkers.length-1].getPosition().lng() },
+
+      waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: 'DRIVING'
+    }, function(response, status) {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+
+
+
+  function setMarkerNull(markers){
+    console.log("hello--null");
+    markers.forEach(function(m) {
+      m.setMap(null);
+    });
+  }
+
+
+  function fullDust(markers, map){
+    console.log("hello--full");
+    markers.forEach(function(m) {
+      m.setMap(map);
+    });
+
+  }
+
+  function allDust(markers, map){
+    console.log("hello--dust");
+    markers.forEach(function(m) {
+      m.setMap(map);
+    });
+  }
+
+// listen submit form
+ // document.getElementById('submit').addEventListener('click',submitForm);
+
+ // function submitForm(e) {
+ //   e.preventDefault();
+ //   var name = getInputValue('name');
+ //   var mobileNumber = getInputValue('mobile');
+ //  var user = document.getElementById("details");
+ //   // save data
+ //   saveData(name,mobileNumber);
+ //   count=count+1;
+ //   // retrieve Data
+ //   retrieveData.on('value',gotData);
+ //  console.log(count);
+ //   console.log(name);
+ //   console.log(mobileNumber);
+ //  var division = document.getElementById('details');
+ //    division.innerHTML = name ;
+ // }
+ // function getInputValue(id) {
+ //   return document.getElementById(id).value;
+ // }
+// function saveData(name,mobileNumber){
+//     sensorData.child("Data "+count).set({
+//      name:name,
+//      mobileNumber:mobileNumber
+//      });
+// }
+</script>
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATkn4hDu4jWQJrKscF8etivXKsSWHfsw0&libraries=places&callback=initAutocomplete" async defer></script>
+ -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATkn4hDu4jWQJrKscF8etivXKsSWHfsw0&libraries=places&callback=myMap"></script>
+
+</body>
+
+
+</html>
